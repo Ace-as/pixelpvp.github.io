@@ -1,90 +1,111 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pixel PvP</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <title>Pixel PvP - MTA Server</title>
   <style>
     body {
-      margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      background-color: #0d0d0d;
-      color: #f5f5f5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5em;
-      color: #00ffff;
-    }
-
-    p {
-      max-width: 600px;
-      font-size: 1.2rem;
-      margin-bottom: 2em;
-      color: #ccc;
-    }
-
-    .buttons a {
-      text-decoration: none;
-      margin: 0.5em;
-      padding: 0.8em 1.5em;
-      background-color: #00ffff;
-      color: #000;
-      border-radius: 8px;
-      transition: 0.3s;
-      font-weight: bold;
-    }
-
-    .buttons a:hover {
-      background-color: #008b8b;
+      font-family: 'Segoe UI', sans-serif;
+      background: #1b1b1b;
       color: #fff;
+      text-align: center;
+      padding: 60px;
+      overflow-x: hidden;
+      margin: 0;
     }
-
-    footer {
-      position: absolute;
-      bottom: 10px;
-      font-size: 0.8rem;
-      color: #555;
+    h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 1.3em;
+      margin: 10px 0;
+    }
+    .ip-box {
+      background: #2a2a2a;
+      padding: 15px 25px;
+      display: inline-block;
+      border-radius: 10px;
+      margin: 20px 0;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+    button {
+      padding: 10px 20px;
+      background: #00c896;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      margin: 10px;
+    }
+    button:hover {
+      background: #00e6aa;
+    }
+    .discord {
+      background: #5865F2;
+    }
+    .discord:hover {
+      background: #4752C4;
+    }
+    .soon {
+      color: #ffa500;
+      font-weight: bold;
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: white;
+      font-size: 1.5em;
+      user-select: none;
+      pointer-events: none;
+      z-index: 9999;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(100vh); }
     }
   </style>
 </head>
 <body>
-  <h1>Pixel PvP</h1>
-  <p>مرحبًا بك في سيرفر Pixel PvP - أفضل تجربة قتال وتحدي في MTA! انضم إلينا وكن أحد المحترفين اليوم!</p>
-  <div class="buttons">
-    <a href="mtasa://your.server.ip:port" target="_blank"> انضم للسيرفر قريبا...</a>
-    <a href="https://discord.gg/4gqU7vVn63" target="_blank">الديسكورد</a>
-    <a href="https://your-download-link.com" target="_blank">تحميل الملفات</a>
-  </div>
-  <footer>&copy; 2025 Pixel PvP. All rights reserved.</footer>
+  <h1>❄️ Pixel PvP MTA Server ❄️</h1>
+  <p>سيرفر قتالي مخصص لمحبي الحماس!</p>
 
-  <div class="server-info">
-    <h2>📊 معلومات السيرفر</h2>
-    <table>
-      <tr><td>🕹️ <strong>IP السيرفر:</strong></td><td><span id="server-ip">mtasa://123.45.67.89:22003</span> <button onclick="copyIP()">📋 نسخ</button></td></tr>
-      <tr><td>👥 <strong>عدد اللاعبين:</strong></td><td>12 / 32</td></tr>
-      <tr><td>⏱️ <strong>مدة التشغيل اليوم:</strong></td><td>6 ساعات</td></tr>
-      <tr><td>✅ <strong>الحالة:</strong></td><td style="color:limegreen;"><strong>شغال الآن</strong></td></tr>
-    </table>
-  </div>
+  <div class="ip-box" id="server-ip">soooon</div><br />
+  <button onclick="copyIP()">📋 نسخ IP</button>
+  <button class="discord" onclick="location.href='https://discord.gg/4gqU7vVn63'">💬 دخول ديسكورد</button>
+
+  <p>🟢 الحالة: <strong>أونلاين</strong></p>
+  <p>👥 اللاعبين: 32/100</p>
+  <p>⏰ السيرفر مفتوح منذ: 4 ساعات</p>
+
+  <p class="soon">🚧 سيرفر MTA سيتم إطلاقه قريبًا! ترقّبونا 🚀</p>
 
   <script>
     function copyIP() {
-      const ipText = document.getElementById("server-ip").innerText;
-      navigator.clipboard.writeText(ipText).then(() => {
-        alert("✅ تم نسخ IP السيرفر: " + ipText);
-      });
+      const ip = document.getElementById("server-ip").innerText;
+      navigator.clipboard.writeText(ip);
+      alert("✅ تم نسخ IP السيرفر: " + ip);
     }
-  </script>
 
+    // ❄️ كود تساقط الثلج
+    function createSnowflake() {
+      const snowflake = document.createElement('div');
+      snowflake.classList.add('snowflake');
+      snowflake.style.left = Math.random() * window.innerWidth + 'px';
+      snowflake.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      snowflake.textContent = '❄️';
+      document.body.appendChild(snowflake);
+      setTimeout(() => {
+        snowflake.remove();
+      }, 5000);
+    }
+    setInterval(createSnowflake, 200);
+  </script>
 </body>
 </html>
