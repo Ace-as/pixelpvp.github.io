@@ -6,22 +6,33 @@
   <title>Pixel PvP - MTA Server</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #1b1b1b;
-      color: #fff;
-      text-align: center;
-      padding: 60px;
-      overflow-x: hidden;
       margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+      overflow-x: hidden;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      background-size: 400% 400%;
+      animation: gradientMove 15s ease infinite;
     }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     h1 {
       font-size: 3em;
       margin-bottom: 10px;
     }
+
     p {
       font-size: 1.3em;
       margin: 10px 0;
     }
+
     .ip-box {
       background: #2a2a2a;
       padding: 15px 25px;
@@ -31,6 +42,7 @@
       font-weight: bold;
       font-size: 1.2em;
     }
+
     button {
       padding: 10px 20px;
       background: #00c896;
@@ -41,21 +53,26 @@
       font-size: 1em;
       margin: 10px;
     }
+
     button:hover {
       background: #00e6aa;
     }
+
     .discord {
       background: #5865F2;
     }
+
     .discord:hover {
       background: #4752C4;
     }
+
     .soon {
       color: #ffa500;
       font-weight: bold;
       margin-top: 20px;
       font-size: 1.2em;
     }
+
     .snowflake {
       position: fixed;
       top: -10px;
@@ -66,6 +83,7 @@
       z-index: 9999;
       animation: fall linear infinite;
     }
+
     @keyframes fall {
       0% { transform: translateY(0); }
       100% { transform: translateY(100vh); }
@@ -76,12 +94,12 @@
   <h1>❄️ Pixel PvP MTA Server ❄️</h1>
   <p>سيرفر قتالي مخصص لمحبي الحماس!</p>
 
-  <div class="ip-box" id="server-ip">soooon</div><br />
+  <div class="ip-box" id="server-ip">soon</div><br />
   <button onclick="copyIP()">📋 نسخ IP</button>
   <button class="discord" onclick="location.href='https://discord.gg/4gqU7vVn63'">💬 دخول ديسكورد</button>
 
-  <p>🟢 الحالة: <strong>أونلاين</strong></p>
-  <p>👥 اللاعبين: 32/100</p>
+  <p>🟢 الحالة: <strong id="server-status">جارٍ التحقق...</strong></p>
+  <p>👥 اللاعبين: <span id="player-count">--</span></p>
   <p>⏰ السيرفر مفتوح منذ: 4 ساعات</p>
 
   <p class="soon">🚧 سيرفر MTA سيتم إطلاقه قريبًا! ترقّبونا 🚀</p>
@@ -106,6 +124,28 @@
       }, 5000);
     }
     setInterval(createSnowflake, 200);
+
+    // 🎮 حالة السيرفر
+    async function fetchServerStatus() {
+      try {
+        const res = await fetch("https://api.pixelpvp.xyz/status"); // ← غيرها إذا حطيت السكربت في رابط آخر
+        const data = await res.json();
+
+        if (data.online) {
+          document.getElementById("server-status").innerText = "أونلاين ✅";
+          document.getElementById("player-count").innerText = `${data.players}/${data.maxPlayers}`;
+        } else {
+          document.getElementById("server-status").innerText = "أوفلاين ❌";
+          document.getElementById("player-count").innerText = "--";
+        }
+      } catch (err) {
+        document.getElementById("server-status").innerText = "خطأ في الاتصال";
+        document.getElementById("player-count").innerText = "--";
+      }
+    }
+
+    fetchServerStatus();
+    setInterval(fetchServerStatus, 10000); // كل 10 ثواني
   </script>
 </body>
 </html>
